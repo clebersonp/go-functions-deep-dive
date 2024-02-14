@@ -10,6 +10,17 @@ func main() {
 
 	tripledTransformed := transformNumbers(&numbers, func(number int) int { return number * 3 })
 	fmt.Println(tripledTransformed)
+
+	fmt.Println("--------------------")
+	// factory function pattern
+	double := createTransformer(2)
+	triple := createTransformer(3)
+
+	// passing functions as values
+	doubled := transformNumbers(&numbers, double)
+	tripled := transformNumbers(&numbers, triple)
+	fmt.Println(doubled)
+	fmt.Println(tripled)
 }
 
 func transformNumbers(numbers *[]int, transform func(int) int) []int {
@@ -20,4 +31,12 @@ func transformNumbers(numbers *[]int, transform func(int) int) []int {
 	}
 
 	return dNumbers
+}
+
+// createTransformer is a factory function pattern to create functions
+func createTransformer(factor int) func(int) int {
+	// functions are closures in Go and lock in values of the out of scope for future functions execution
+	return func(number int) int {
+		return number * factor
+	}
 }
