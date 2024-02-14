@@ -13,6 +13,7 @@ func main() {
 
 	fmt.Println("--------------------")
 	// factory function pattern
+	// closure: will lock in the factors 2 and 3 inside an anonymous function
 	double := createTransformer(2)
 	triple := createTransformer(3)
 
@@ -35,7 +36,8 @@ func transformNumbers(numbers *[]int, transform func(int) int) []int {
 
 // createTransformer is a factory function pattern to create functions
 func createTransformer(factor int) func(int) int {
-	// functions are closures in Go and lock in values of the out of scope for future functions execution
+	// every anonymous functions are closures in Go and lock in values of the out of scope (factor in this case)
+	// for future functions execution
 	return func(number int) int {
 		return number * factor
 	}
