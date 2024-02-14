@@ -20,6 +20,17 @@ func main() {
 
 	tripled := transformNumbers(&numbers, triple)
 	fmt.Println(tripled)
+
+	fmt.Println("------------------------")
+	moreNumbers := []int{5, 7, 9}
+	doubledNumbersFunction := getTransformerFunction(&numbers)
+	tripledMoreNumbersFunction := getTransformerFunction(&moreNumbers)
+
+	doubledNumbers := transformNumbers(&numbers, doubledNumbersFunction)
+	tripledMoreNumbers := transformNumbers(&moreNumbers, tripledMoreNumbersFunction)
+
+	fmt.Println(doubledNumbers)
+	fmt.Println(tripledMoreNumbers)
 }
 
 func transformNumbers(numbers *[]int, transform transformFn) []int {
@@ -28,6 +39,16 @@ func transformNumbers(numbers *[]int, transform transformFn) []int {
 		transformResult = append(transformResult, transform(number))
 	}
 	return transformResult
+}
+
+// getTransformerFunction returns a custom type of function as a value
+// function can return other function
+func getTransformerFunction(numbers *[]int) transformFn {
+	if (*numbers)[0] == 1 {
+		return double
+	} else {
+		return triple
+	}
 }
 
 func double(number int) int {
