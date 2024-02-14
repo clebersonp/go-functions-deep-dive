@@ -6,7 +6,7 @@ import "fmt"
 type transformFn func(int) int
 
 // just for example of a more complex func signature as a custom type
-type anotherFn func(int, []string, map[string][]int)
+type anotherFn func(int, []string, map[string][]int) ([]int, string)
 
 func main() {
 
